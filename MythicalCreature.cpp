@@ -12,6 +12,21 @@
 
 using namespace std;
 
+string RPS(int choice)
+{
+    switch (choice) {
+        case 0:
+        return "Rock";
+        case 1:
+        return "Paper";
+        case 2:
+        return "Scissors";
+        default:
+        return "Unknown";
+    }
+    return "";
+}
+
 int generate_probabilities(double p[3])
 {
     // Assume srand() has already been called
@@ -20,7 +35,7 @@ int generate_probabilities(double p[3])
     double total = 0.0;
     for (int i = 0; i < 3; i++)
     {
-        p[i] = static_cast<double>(rand() << 16) / static_cast<double>(numeric_limits<int>::max());
+        p[i] = static_cast<double>(rand()) / static_cast<double>(numeric_limits<int>::max());
         total += p[i];
     }
 
@@ -47,7 +62,7 @@ MythicalCreature::MythicalCreature(string name):
 
 MythicalCreature::~MythicalCreature()
 {
-    cout << "Destroying: " << _name << endl;
+    //cout << "Destroying: " << _name << endl;
 }
 
 int MythicalCreature::init_RPS_probabilities()
@@ -86,6 +101,11 @@ int MythicalCreature::chooseRPS()
         }
     }
     return -1;  // Something went wrong
+}
+
+void MythicalCreature::showChoice()
+{
+    cout << _name << ": picked " << RPS(_curRPS_choice) << endl;
 }
 
 int MythicalCreature::getCurrentChoice()

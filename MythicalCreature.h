@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <limits>
+#include <sstream>
 
 using namespace std;
 
@@ -17,7 +18,12 @@ public:
     int init_RPS_probabilities();
     int chooseRPS();    // 0 = Rock, 1 = Paper, 3 = Scissors
     int getCurrentChoice();
+    void showChoice();
     int won();      // Won an individual player, returns total win count
+    string setName(string name) {
+        _name = name;
+        return _name;
+    }
     string getName() {
         return _name;
     }
@@ -28,6 +34,13 @@ public:
         return _gamesPlayed;
     }
     string probStr();
+    string display() {
+        ostringstream os;
+        os << getName() << " with RPS prob's of " << probStr() << " won " << getWinCount()
+            << " of " << getGamesPlayed() << endl;
+            return os.str();
+    }
+
     static int _nextCreatureID;
     static bool _srandSeeded;
 

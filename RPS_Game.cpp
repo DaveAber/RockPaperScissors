@@ -15,9 +15,12 @@ int play_RockPaperScissors(vector<MythicalCreature>&creatures)
     // Assumes srand() has already been called
  
     // Have each creature make a RPS choice
+    cout << "New Game:" << endl;
     for (int creatureNum = 0; creatureNum < (int)creatures.size(); creatureNum++)
     {
         creatures[creatureNum].chooseRPS();
+        cout << "\t";
+        creatures[creatureNum].showChoice();
     }
 
     // Rock beats scissors (0 vs 2), Scissors beats paper (2 vs 1), Paper beats rock (1 vs 0);
@@ -31,6 +34,7 @@ int play_RockPaperScissors(vector<MythicalCreature>&creatures)
             if (creatures[creatureNum2].getCurrentChoice() == beats)
             {
                 creatures[creatureNum1].won();
+                cout << creatures[creatureNum1].getName() << " beat " << creatures[creatureNum2].getName() << endl;
             }
         }
     }

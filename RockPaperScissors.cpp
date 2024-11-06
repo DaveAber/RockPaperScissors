@@ -31,6 +31,13 @@ int main()
 
     creatures.resize(5);
 
+    // Give the creatures their names
+    creatures[0].setName("Bubblocto");
+    creatures[1].setName("Skyfin");
+    creatures[2].setName("Akama");
+    creatures[3].setName("Bearmantle");
+    creatures[4].setName("Gelbin");
+
     // Initialize the creatures RPS tenancies
     for (MythicalCreature& creature : creatures)
     {
@@ -47,10 +54,16 @@ int main()
         play_RockPaperScissors(creatures);
     }
 
+    // Tally the wins
+    int totalWins = 0;
+    for (MythicalCreature& creature : creatures)
+        totalWins += creature.getWinCount();
+
     for (MythicalCreature& creature : creatures)
         cout << creature.getName() << " with RPS prob's of " << creature.probStr() << " won " << creature.getWinCount() << " of " << creature.getGamesPlayed() << endl;
 
-
+    cout << "Total wins: " << totalWins << endl;
+    
     return 0;
 }
 
