@@ -43,10 +43,6 @@ int main()
     {
         creature.init_RPS_probabilities();
     }
-    for (MythicalCreature& creature : creatures)
-    {
-        creature.init_RPS_probabilities();
-    }
 
     // Play some games
     for (int gameNum = 0; gameNum < 20; gameNum++)
