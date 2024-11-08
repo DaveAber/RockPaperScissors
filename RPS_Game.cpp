@@ -23,24 +23,8 @@ int play_RockPaperScissors(vector<MythicalCreature>&creatures)
         creatures[creatureNum].showChoice();
     }
 
-#if 0
     // Rock beats scissors (0 vs 2), Scissors beats paper (2 vs 1), Paper beats rock (1 vs 0);
     // give credit for each time a choice of rock encounters a scissors, etc.
-    for (int creatureNum1 = 0; creatureNum1 < (int)creatures.size(); creatureNum1++)
-    {
-        // What does this creature beat
-        int beats = (creatures[creatureNum1].getCurrentChoice() + 2) % 3;
-        for (int creatureNum2 = 0; creatureNum2 < (int)creatures.size(); creatureNum2++)
-        {
-            if (creatures[creatureNum2].getCurrentChoice() == beats)
-            {
-                creatures[creatureNum1].won();
-                cout << creatures[creatureNum1].getName() << " beat " << creatures[creatureNum2].getName() << endl;
-            }
-        }
-    }
-#endif
-
     for (MythicalCreature& creature1 : creatures)
     {
         // What does this creature beat
