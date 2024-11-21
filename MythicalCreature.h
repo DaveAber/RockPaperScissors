@@ -37,8 +37,8 @@ public:
     string display() {
         ostringstream os;
         os << getName() << " with RPS prob's of " << probStr() << " won " << getWinCount()
-            << " of " << getGamesPlayed() << endl;
-            return os.str();
+            << " of " << getGamesPlayed();
+        return os.str();
     }
 
     static int _nextCreatureID;

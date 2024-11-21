@@ -8,6 +8,7 @@
 
 #include "MythicalCreature.h"
 #include "RPS_Game.h"
+#include "Tournament.h"
 
 using namespace std;
 
@@ -16,6 +17,10 @@ int main()
 {
     std::cout << "Hello World!\n";
     double p[3];
+    enum GamePlay {
+        GP_GROUP,
+        GP_TOURNAMENT
+    } gamePlay = GP_TOURNAMENT;
 
     if (0)
     {
@@ -44,21 +49,35 @@ int main()
         creature.init_RPS_probabilities();
     }
 
-    // Play some games
-    for (int gameNum = 0; gameNum < 20; gameNum++)
+    if (gamePlay == GP_GROUP)
     {
-        play_RockPaperScissors(creatures);
+        // Play some games
+        for (int gameNum = 0; gameNum < 20; gameNum++)
+        {
+            play_RockPaperScissors(creatures);
+        }
+
+        // Tally the wins
+        int totalWins = 0;
+        for (MythicalCreature& creature : creatures)
+            totalWins += creature.getWinCount();
+
+        for (MythicalCreature& creature : creatures)
+            cout << creature.getName() << " with RPS prob's of " << creature.probStr() << " won " << creature.getWinCount() << " of " << creature.getGamesPlayed() << endl;
+
+        cout << "Total wins: " << totalWins << endl;
+    } else if (gamePlay == GP_TOURNAMENT)
+    {
+        Tournament tourney;
+
+        // Add all the players
+        for (MythicalCreature& creature: creatures)
+        {
+            tourney.addPlayer(creature);
+        }
+        tourney.dumpPlayers();
+
     }
-
-    // Tally the wins
-    int totalWins = 0;
-    for (MythicalCreature& creature : creatures)
-        totalWins += creature.getWinCount();
-
-    for (MythicalCreature& creature : creatures)
-        cout << creature.getName() << " with RPS prob's of " << creature.probStr() << " won " << creature.getWinCount() << " of " << creature.getGamesPlayed() << endl;
-
-    cout << "Total wins: " << totalWins << endl;
     
     return 0;
 }
