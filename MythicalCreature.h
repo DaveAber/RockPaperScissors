@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CREATURE_H
+#define CREATURE_H
 
 #include <iostream>
 #include <ctime>
@@ -52,3 +53,4 @@ private:
     int _curRPS_choice;
 };
 
+#endif  // CREATURE_H

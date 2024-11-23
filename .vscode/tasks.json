@@ -13,7 +13,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++ build active file",
-            "command": "/usr/bin/g++",
+            "command": "C:/Program Files/msys64/ucrt64/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",

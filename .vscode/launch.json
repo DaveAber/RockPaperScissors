@@ -8,12 +8,13 @@
             "name": "Make & Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/RockPaperScissors",
+            "program": "${workspaceFolder}/RockPaperScissors.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
+            "miDebuggerPath": "C:/Program Files/msys64/ucrt64/bin/gdb.exe",
             "MIMode": "gdb",
             "setupCommands": [
                 {

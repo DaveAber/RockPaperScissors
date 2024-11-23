@@ -16,20 +16,13 @@ using namespace std;
 int main()
 {
     std::cout << "Hello World!\n";
-    double p[3];
     enum GamePlay {
         GP_GROUP,
         GP_TOURNAMENT
     } gamePlay = GP_TOURNAMENT;
 
-    if (0)
-    {
-        generate_probabilities(p);
-
-        cout << "Rock:\t\t" << p[0] << endl;
-        cout << "Paper:\t\t" << p[1] << endl;
-        cout << "Scissors:\t" << p[2] << endl;
-    }
+    // Seed random number generator
+    srand(time(nullptr));
 
     // Create some creatures
     vector<MythicalCreature>creatures;
@@ -54,7 +47,7 @@ int main()
         // Play some games
         for (int gameNum = 0; gameNum < 20; gameNum++)
         {
-            play_RockPaperScissors(creatures);
+            groupPlay_RockPaperScissors(creatures);
         }
 
         // Tally the wins
@@ -77,9 +70,39 @@ int main()
         }
         tourney.dumpPlayers();
 
+        // Test code for tournament game 1 team player vs 1 team player
+        {
+            vector<Team> teams;
+            // Create a team with each player
+            for (MythicalCreature& creature : creatures)
+            {
+                Team team;
+                team.addPlayer(creature);
+                teams.push_back(team);
+            }
+
+            // For each pair of teams, have them play just their first
+            // (and only) player
+            for (int team1Num=0; team1Num < int(teams.size()); team1Num++)
+            {
+                 for (int team2Num=team1Num+1; team2Num < int(teams.size()); team2Num++)
+                 {
+                    matchPlay_RockPaperScissors(teams[team1Num], 0,
+                        teams[team2Num], 0);
+                 }
+            }
+
+            // Dump wins
+            for (Team& team: teams)
+            {
+                team.dump();
+            }
+        }
+
+        // Run a tournament
+        // tourney.runTournament(parameters)
+
     }
     
     return 0;
 }
-
-

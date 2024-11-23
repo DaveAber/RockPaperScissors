@@ -1,15 +1,17 @@
 #include "Tournament.h"
 
 
-void Team::dumpPlayers()
+int Team::lastID = 0;
+
+void Team::dump()
 {
-    cout << "Team with " << members.size() << " players:" << endl;
-    for (MythicalCreature& members: members)
+    cout << "Team " << _id << " with " << members.size() << " players"
+        << " won " << _gamesWon << " of " << _gamesPlayed << " matches:"<< endl;
+    for (MythicalCreature& member: members)
     {
-        cout << "\t" << members.display() << endl;
+        cout << "\t" << member.display() << endl;
     }
 }
-
 
 void Tournament::dumpPlayers()
 {
