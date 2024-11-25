@@ -1,14 +1,14 @@
-all : RockPaperScissors
+all : main
 
-main RockPaperScissors : RockPaperScissors.cpp MythicalCreature.cpp MythicalCreature.h \
-	RPS_Game.cpp RPS_Game.h Tournament.cpp Tournament.h
-	g++ -g -Wall -Wextra -pedantic RockPaperScissors.cpp MythicalCreature.cpp RPS_Game.cpp \
-	Tournament.cpp -o RockPaperScissors
+main: main.cpp creature.cpp creature.h \
+	rpsgame.cpp rpsgame.h tournament.cpp tournament.h
+	g++ -g -Wall -Wextra -pedantic main.cpp creature.cpp rpsgame.cpp \
+	tournament.cpp -o main
 
-run : RockPaperScissors
-	./RockPaperScissors
+run : main
+	./main
 
 clean :
-	rm -f RockPaperScissors
+	rm -f main
 
 .PHONY : all run clean

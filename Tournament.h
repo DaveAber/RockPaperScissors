@@ -2,7 +2,7 @@
 #define TOURNAMENT_H
 
 #include <vector>
-#include "MythicalCreature.h"
+#include "creature.h"
 
 
 class Team
@@ -11,10 +11,10 @@ class Team
 public:
     Team(): _gamesPlayed(0), _gamesWon(0) { _id = ++lastID; };
     ~Team() {};
-    vector<MythicalCreature> members;
+    vector<Creature> members;
 
     // Add a player from the pool, to this particular team
-    int addPlayer(MythicalCreature& player) {
+    int addPlayer(Creature& player) {
         members.push_back(player);
         return members.size();
     }
@@ -46,7 +46,7 @@ private:
 
 class Tournament
 {
-    vector<MythicalCreature> players;
+    vector<Creature> players;
     vector<Team> teams;
 
 public:
@@ -54,7 +54,7 @@ public:
     ~Tournament() {};
 
     // Players for the entire tournament.  Teams to be created from player pool, once all players added
-    int addPlayer(MythicalCreature& player) {
+    int addPlayer(Creature& player) {
         players.push_back(player);
         return players.size();
     }

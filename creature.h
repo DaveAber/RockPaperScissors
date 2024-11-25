@@ -10,11 +10,11 @@ using namespace std;
 
 int generate_probabilities(double p[3]);
 
-class MythicalCreature
+class Creature
 {
 public:
-    MythicalCreature(string name = "");
-    ~MythicalCreature();
+    Creature(string name = "");
+    ~Creature();
 
     int init_RPS_probabilities();
     int chooseRPS();    // 0 = Rock, 1 = Paper, 3 = Scissors

@@ -8,7 +8,7 @@
 #include <random>
 #include <limits>
 
-#include "MythicalCreature.h"
+#include "creature.h"
 
 using namespace std;
 
@@ -49,10 +49,10 @@ int generate_probabilities(double p[3])
 }
 
 
-int MythicalCreature::_nextCreatureID = 0;
-bool MythicalCreature::_srandSeeded = 0;
+int Creature::_nextCreatureID = 0;
+bool Creature::_srandSeeded = 0;
 
-MythicalCreature::MythicalCreature(string name):
+Creature::Creature(string name):
     _name(name), _gamesPlayed(0), _gamesWon(0), _curRPS_choice(-1)
 {
     ostringstream os;
@@ -60,12 +60,12 @@ MythicalCreature::MythicalCreature(string name):
     _name = os.str();
 }
 
-MythicalCreature::~MythicalCreature()
+Creature::~Creature()
 {
     //cout << "Destroying: " << _name << endl;
 }
 
-int MythicalCreature::init_RPS_probabilities()
+int Creature::init_RPS_probabilities()
 {
     if (!_srandSeeded)
     {
@@ -79,7 +79,7 @@ int MythicalCreature::init_RPS_probabilities()
     return 0;
 }
 
-int MythicalCreature::chooseRPS()
+int Creature::chooseRPS()
 {
     _gamesPlayed++;         // Consider this a game played
 
@@ -103,22 +103,22 @@ int MythicalCreature::chooseRPS()
     return -1;  // Something went wrong
 }
 
-void MythicalCreature::showChoice()
+void Creature::showChoice()
 {
     cout << _name << ": picked " << RPS(_curRPS_choice) << endl;
 }
 
-int MythicalCreature::getCurrentChoice()
+int Creature::getCurrentChoice()
 {
     return _curRPS_choice;
 }
 
-int MythicalCreature::won()
+int Creature::won()
 {
     return ++_gamesWon;
 }
 
-string MythicalCreature::probStr()
+string Creature::probStr()
 {
     ostringstream os;
     os << this->_RPS_probabilities[0] << "," << this->_RPS_probabilities[1] << "," << this->_RPS_probabilities[2];

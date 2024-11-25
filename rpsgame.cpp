@@ -5,13 +5,13 @@
 #include <string>
 #include <vector>
 
-#include "MythicalCreature.h"
-#include "RPS_Game.h"
+#include "creature.h"
+#include "rpsgame.h"
 
 using namespace std;
 
 // All creatures play against the group, single game
-int groupPlay_RockPaperScissors(vector<MythicalCreature>&creatures)
+int groupPlay_RockPaperScissors(vector<Creature>&creatures)
 {
     // Assumes srand() has already been called
  
@@ -26,7 +26,7 @@ int groupPlay_RockPaperScissors(vector<MythicalCreature>&creatures)
 
     // Rock beats scissors (0 vs 2), Scissors beats paper (2 vs 1), Paper beats rock (1 vs 0);
     // give credit for each time a choice of rock encounters a scissors, etc.
-    for (MythicalCreature& creature1 : creatures)
+    for (Creature& creature1 : creatures)
     {
         // What does this creature beat
         int beats = (creature1.getCurrentChoice() + 2) % 3;

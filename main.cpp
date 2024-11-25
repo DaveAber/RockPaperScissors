@@ -6,9 +6,9 @@
 #include <limits>
 #include <vector>
 
-#include "MythicalCreature.h"
-#include "RPS_Game.h"
-#include "Tournament.h"
+#include "creature.h"
+#include "rpsgame.h"
+#include "tournament.h"
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main()
     srand(time(nullptr));
 
     // Create some creatures
-    vector<MythicalCreature>creatures;
+    vector<Creature>creatures;
 
     creatures.resize(5);
 
@@ -37,7 +37,7 @@ int main()
     creatures[4].setName("Gelbin");
 
     // Initialize the creatures RPS tenancies
-    for (MythicalCreature& creature : creatures)
+    for (Creature& creature : creatures)
     {
         creature.init_RPS_probabilities();
     }
@@ -52,10 +52,10 @@ int main()
 
         // Tally the wins
         int totalWins = 0;
-        for (MythicalCreature& creature : creatures)
+        for (Creature& creature : creatures)
             totalWins += creature.getWinCount();
 
-        for (MythicalCreature& creature : creatures)
+        for (Creature& creature : creatures)
             cout << creature.getName() << " with RPS prob's of " << creature.probStr() << " won " << creature.getWinCount() << " of " << creature.getGamesPlayed() << endl;
 
         cout << "Total wins: " << totalWins << endl;
@@ -64,7 +64,7 @@ int main()
         Tournament tourney;
 
         // Add all the players
-        for (MythicalCreature& creature: creatures)
+        for (Creature& creature: creatures)
         {
             tourney.addPlayer(creature);
         }
@@ -74,7 +74,7 @@ int main()
         {
             vector<Team> teams;
             // Create a team with each player
-            for (MythicalCreature& creature : creatures)
+            for (Creature& creature : creatures)
             {
                 Team team;
                 team.addPlayer(creature);
