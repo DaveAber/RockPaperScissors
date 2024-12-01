@@ -59,7 +59,15 @@ public:
         return players.size();
     }
 
+    // Make teams from the pool of players
+    int makeTeams();
+
+    // Have teams play games
+    int teamPlay();
+
     void dumpPlayers();
+
+    void showResults();
 };
 
 #endif  // TOURNAMENT_H

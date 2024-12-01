@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int makeRand(int maxval);
+
 int generate_probabilities(double p[3]);
 
 class Creature

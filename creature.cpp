@@ -27,6 +27,13 @@ string RPS(int choice)
     return "";
 }
 
+// Generate a random int from 0 to maxval
+int makeRand(int maxval)
+{
+    return static_cast<int>(static_cast<double>(maxval *
+        static_cast<double>(rand()) / static_cast<double>(numeric_limits<int>::max())));
+}
+
 int generate_probabilities(double p[3])
 {
     // Assume srand() has already been called
