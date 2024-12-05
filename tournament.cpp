@@ -72,8 +72,12 @@ int Tournament::teamPlay()
 
     for (size_t teamA=0; teamA < teams.size(); teamA++)
     {
+        if (teams[teamA].isDisabled())
+            continue;
         for (size_t teamB=teamA+1; teamB < teams.size(); teamB++)
         {
+            if (teams[teamB].isDisabled())
+                continue;
             for (size_t playerA=0; playerA < teams[teamA].members.size(); playerA++)
             {
                 for (size_t playerB=0; playerB < teams[teamB].members.size(); playerB++)
@@ -84,6 +88,38 @@ int Tournament::teamPlay()
         }
     }
 
+    // Find the most wins for a team
+    Team* winningTeam = nullptr;
+    int mostWins = 0;
+    for (Team& team: teams) {
+        if (team.getWinCount() > mostWins) {
+            mostWins = team.getWinCount();
+            winningTeam = &team;
+        }
+    }
+
+    bool force_a_tie = num_active_teams() > 2;
+
+    // Check for a single winning team; disable any known losing teams in case we need
+    // to run another mini-tournament
+    int num_winning_teams = 0;
+    for (Team& team: teams) {
+        if (force_a_tie && team.getID() != winningTeam->getID()) {
+            team.setWinCount(mostWins);
+            force_a_tie = false;
+        }
+        if (team.getWinCount() == mostWins) {
+            num_winning_teams++;
+        } else {
+            team.disablePlay(); // Won't be included in a mini-tournament
+        }
+    }
+
+    // Do we need a mini-tournament?
+    if (num_winning_teams > 1) {
+        teamPlay();
+    }
+
     return 0;
 }
 
@@ -92,6 +128,8 @@ void Tournament::showResults()
     Team* winningTeam = nullptr;
     int mostWins = 0;
     for (Team& team: teams) {
+        if (team.isDisabled())
+            continue;
         team.dump();
         if (team.getWinCount() > mostWins) {
             mostWins = team.getWinCount();
@@ -101,6 +139,8 @@ void Tournament::showResults()
 
     // Double check that another team didn't tie
     for (Team& team: teams) {
+        if (team.isDisabled())
+            continue;
         if (team.getID() != winningTeam->getID()) {
             if (team.getWinCount() >= mostWins) {
                 cout << "TYING TEAM: " << team.getID() << " has " << team.getWinCount() << " wins" << endl;

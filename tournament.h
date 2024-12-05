@@ -9,7 +9,7 @@ class Team
 {
     static int lastID;
 public:
-    Team(): _gamesPlayed(0), _gamesWon(0) { _id = ++lastID; };
+    Team(): _gamesPlayed(0), _gamesWon(0), _disabled(false) { _id = ++lastID; };
     ~Team() {};
     vector<Creature> members;
 
@@ -35,6 +35,16 @@ public:
     int getID() const {
         return _id;
     }
+    bool disablePlay() {
+        _disabled = true;
+        return _disabled;
+    }
+    bool isDisabled() {
+        return _disabled;
+    }
+    int setWinCount(int wins) { // For testing of a tie
+        return _gamesWon = wins;
+    }
 
     void dump();
 
@@ -42,6 +52,7 @@ private:
     int _id;
     int _gamesPlayed;
     int _gamesWon;
+    bool _disabled;
 };
 
 class Tournament
@@ -68,6 +79,15 @@ public:
     void dumpPlayers();
 
     void showResults();
+
+    int num_active_teams() {
+        int active_teams = 0;
+        for (Team& team: teams) {
+            if (! team.isDisabled())
+                active_teams++;
+        }
+        return active_teams;
+    }
 };
 
 #endif  // TOURNAMENT_H
